@@ -122,7 +122,7 @@ long LinuxParser::ActiveJiffies(int pid) {
     std::getline(file, line);
     std::stringstream linestream(line);
     while (linestream >> data) {
-      if ((cnt > 12 && cnt < 18) || cnt == 22) {
+      if (cnt > 12 && cnt < 18) {
         procStartTime += stol(data);
       }      
       cnt++;

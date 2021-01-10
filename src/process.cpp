@@ -14,12 +14,9 @@ using std::vector;
 int Process::Pid() { return this->PID; }
 
 float Process::CpuUtilization() const {
-  long totalTime = LinuxParser::ActiveJiffies(this->PID) / sysconf(_SC_CLK_TCK);
-  //long processStartTime = LinuxParser::ActiveJiffies(this->PID) / sysconf(_SC_CLK_TCK);
-  long processRunTime = LinuxParser::UpTime(this->PID);
-  /*return (LinuxParser::ActiveJiffies(this->PID) / sysconf(_SC_CLK_TCK)) /
-         (LinuxParser::UpTime(this->PID) / 1000.0);*/
-  return (processRunTime / (float) totalTime) / 1000;
+  long totalTime = LinuxParser::ActiveJiffies(this->PID) / sysconf(_SC_CLK_TCK);  
+  long processRunTime = LinuxParser::UpTime(this->PID);  
+  return ((float) totalTime / processRunTime);
 }
 
 string Process::Command() { return LinuxParser::Command(this->PID); }
